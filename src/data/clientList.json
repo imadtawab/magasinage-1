@@ -1,0 +1,13 @@
+[
+    {"id":1, "name": "Alpha Logistics", "franchise": 15 },
+    {"id":2, "name": "Blue Wave Tech", "franchise": 22 },
+    {"id":3, "name": "Green Horizon", "franchise": 18 },
+    {"id":4, "name": "Nova Solutions", "franchise": 12 },
+    {"id":5, "name": "Skyline Ventures", "franchise": 20 },
+    {"id":6, "name": "Oceanic Partners", "franchise": 17 },
+    {"id":7, "name": "Solaris Dynamics", "franchise": 25 },
+    {"id":8, "name": "Urban Nexus", "franchise": 10 },
+    {"id":9, "name": "Vertex Innovations", "franchise": 13 },
+    {"id":10, "name": "Zenith Group", "franchise": 19 },
+    {"id":11, "name": "zoon black", "franchise": 19 }
+  ]

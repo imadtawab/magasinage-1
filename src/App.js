@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ClientList from "./Components/ClientList";
+import Form from "./Components/Form";
+import clientList from "../src/data/clientList.json"
 
 function App() {
+    const [clientSelected, setClientSelected] = useState(null);
+    const [search, setSearch] = useState("");
+    const [franknessNotExpired, setFranknessNotExpired] = useState(null);
+    const [calculateResult, setCalculateResult] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <ClientList setFranknessNotExpired={setFranknessNotExpired}
+setCalculateResult={setCalculateResult} search={search} setSearch={setSearch} clientList={clientList} clientSelected={clientSelected} setClientSelected={setClientSelected}/>
+      <Form franknessNotExpired={franknessNotExpired}
+setFranknessNotExpired={setFranknessNotExpired} calculateResult={calculateResult}
+setCalculateResult={setCalculateResult} setSearch={setSearch} clientSelected={clientSelected} setClientSelected={setClientSelected}/>
+    </main>
   );
 }
 

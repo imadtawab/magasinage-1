@@ -1,13 +1,205 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #424242;
+  /* background-color: #f1f1f1; */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+label {
+  display: block;
+  padding-bottom: 10px;
+  span {
+    color: #458fff;
+    font-weight: bold;
+    
+  }
 }
+input {
+  width: 100%;
+  background: #fcfcfc;
+  border: 1px solid #e3e2e2;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  padding: 10px 15px;
+  min-width: 150px;
+  &:focus {
+      border-color: #458fff;
+  box-shadow: 0 0 0 3px rgba(69, 143, 255, .729);
+  }
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.ClientList {
+  width: 450px;
+  background: #f5f5f5e3;
+    padding: 30px;
+    height: 100vh;
+  input {
+    margin: 25px 0;
+  }
+  .clients-list {
+    /* overflow: auto;
+    max-height: calc(100vh - 181px);
+    padding: 20px;
+    box-shadow: 0 0 10px 0px #dfdfdf;
+    border-radius: 8px; */
+    overflow: auto;
+        max-height: calc(100vh - 181px);
+        padding: 0 20px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 8px;
+    }
+
+    .box {
+      font-weight: bold;
+      background: #fff;
+      /* background: #6d6d6d0d; */
+      padding: 22px 15px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      gap: 10px;
+      align-items: center;
+      transition: all .2s;
+      user-select: none;
+      &.active {
+          background: #29a5a7;
+          color: #fff;
+          transform: scale(1.05);
+          margin: 9px 0px;
+      }
+      &:hover:not(.active) {
+        transform: scale(1.05);
+        margin: 9px 0px;
+        background: #9191911f;
+      }
+      .name {
+        text-transform: capitalize;
+      }
+      .day {
+        text-wrap: nowrap;
+    }
+  }
+}
+}
+.Form {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  h2 {
+    margin-bottom: 50px;
+  }
+  form {
+    section {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      .box {
+        flex: 1;
+      }
+    }
+    .footer {
+      margin-top: 20px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 40px;
+      display: flex;
+      gap: 10px;
+      justify-content: end;
+  }
+  .footer button {
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 18px;
+      transition: all .3s;
+      cursor: pointer;
+      &#reset {
+          background-color: #df2626;
+      }
+      &#calculate {
+          background-color: #29a5a7;
+      }
+      &:hover {
+          opacity: .8;
+      }
+      &:active {
+          transform: scale(.9);
+      }
+  }
+  .output {
+      display: flex;
+      column-gap: 5px;
+      /* margin-top: 40px; */
+      justify-content: space-between;
+      padding-top: 40px;
+      &:has(.box) {
+          @media (max-width: 500px) {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+          }
+      }
+      .box {
+        text-align: center;
+        h3 {
+          color: #29a5a7;
+          font-size: 18px;
+      }
+      .value {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 20px 0;
+        span {
+          font-size: 16px;
+          display: block;
+          font-weight: 100;
+          margin-top: 5px;
+      }
+    }
+  }
+  h2 {
+    text-align: center;
+    font-size: 21px;
+    line-height: 1.5;
+    flex: 1;
+    span {
+        color: #29a5a7;
+        &.exit-date {
+            color: #df2626;
+        }
+    }
+}
+  }
+  }
+
+
+}
+

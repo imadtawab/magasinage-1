@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-export default function Form({clientSelected, setClientSelected, setSearch,franknessNotExpired ,setFranknessNotExpired,calculateResult ,setCalculateResult}) {
+export default function Form({clientSelected, setClientSelected, setSearch,franknessNotExpired ,setFranknessNotExpired,calculateResult ,setCalculateResult, dataHistory, setDataHistory}) {
     const [weight, setWeight] = useState("");
     const [VTD, setVTD] = useState("");
     const [depotDate, setDepotDate] = useState("");
     const [exitDate, setExitDate] = useState(formatDate(new Date(), true));
     const [frankness, setFrankness] = useState(7);
+    const [historyShippement, setHistoryShippement] = useState("");
   
+    const [finish, setFinish] = useState(false)
+
 
     const submitHandler = (e) => {
         e.preventDefault();
         setFranknessNotExpired(null)
         setCalculateResult(null)
+        setHistoryShippement("")
+        setFinish(false)
+
         // Handle Nbr of ton
         let nbrOfTon = Math.ceil(weight / 1000)
         
@@ -54,6 +60,9 @@ export default function Form({clientSelected, setClientSelected, setSearch,frank
         setCalculateResult(null)
         setClientSelected(null)
         setSearch("")
+        setHistoryShippement("")
+        setFinish(false)
+
     }
     function formatDate(date, forChangeValue = false) {
         const day = date.getDate();
@@ -65,7 +74,24 @@ export default function Form({clientSelected, setClientSelected, setSearch,frank
     useEffect(() => {
         setFrankness(clientSelected?.franchise || 7)
     }, [clientSelected])
-    
+    const saveHistoryHandler = (e) => {
+      e.preventDefault()
+      let DB = dataHistory
+      let shippmentExists = DB.find(i => i.shippment === historyShippement)
+      let newHistory = {
+        shippment: historyShippement,
+        input: {weight,VTD,depotDate,exitDate,frankness},
+        output: calculateResult
+      }
+      if(shippmentExists) {
+        DB = DB.map(i => i.shippment === historyShippement ? null : i).filter(a => a !== null)
+      }
+      DB.unshift(newHistory)
+      setDataHistory(DB)
+      localStorage.setItem("DB", JSON.stringify(DB))
+      
+      setFinish(true)
+    }
   return (
     <div className="Form">
       <h2>Magasinage</h2>
@@ -129,6 +155,7 @@ export default function Form({clientSelected, setClientSelected, setSearch,frank
             Calculate
           </button>
         </div>
+      </form>
         {franknessNotExpired && (
             <div id="output" className="output">
                 {franknessNotExpired.exitDateValue - franknessNotExpired.today === 0 ? (
@@ -145,6 +172,7 @@ export default function Form({clientSelected, setClientSelected, setSearch,frank
             </div>
         )}
         {calculateResult && (
+          <>
             <div id="output" className="output">
                 <div className="box">
                     <h3>LWSTR</h3>
@@ -159,8 +187,16 @@ export default function Form({clientSelected, setClientSelected, setSearch,frank
                 <div className="value">{calculateResult.ttc.toFixed(2)} Dhs</div>
             </div>
             </div>
+            {finish ? (
+              <div className="finish-history">The shippment has been saved in hystory 😉.</div>
+            ) : (
+            <form onSubmit={saveHistoryHandler} className="new-history">
+              <input required value={historyShippement} onChange={(e)=> setHistoryShippement(e.target.value.toUpperCase())} type="text" placeholder="Shippment"/>
+              <button id="save">Save in hystory</button>
+            </form>
+            )}
+            </>
         )}
-      </form>
     </div>
   );
 }
